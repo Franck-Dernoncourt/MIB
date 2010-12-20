@@ -19,7 +19,6 @@ from pygame.locals import *
 from math import *
 
 # Parameters definition
-full_screen = False
 window_size = (1024, 768)
 circles = ((0, 1),)
 circle_scale = 0.3
@@ -55,53 +54,58 @@ def rotate(point):
 
 
 # Main function
-frames, show = 0, True
-try:
-    pygame.init()
+def exp1(full_screen, resultFile):
+    frames, show = 0, True
+    try:
+        pygame.init()
+        
+        # Graphics initializations
+        if full_screen:
+            surf = pygame.display.set_mode(window_size, HWSURFACE | FULLSCREEN | DOUBLEBUF)
+        else:
+            surf = pygame.display.set_mode(window_size)
     
-    # Graphics initializations
-    if full_screen:
-        surf = pygame.display.set_mode(window_size, HWSURFACE | FULLSCREEN | DOUBLEBUF)
-    else:
-        surf = pygame.display.set_mode(window_size)
-
-    # Stimulus display
-    t0 = pygame.time.get_ticks()
-    while True:
-        for event in pygame.event.get():
-            if event.type in (QUIT, KEYDOWN): raise Exception()
-            elif event.type == MOUSEBUTTONDOWN: frames, show = 0, False
-            elif event.type == MOUSEBUTTONUP: frames, show = 0, True
-
-        surf.fill(bg_color)
-        t = (pygame.time.get_ticks() - t0) / 1000.0
-        set_rotation(rotation_speed * t)
-        for i in range(-n_grid, +n_grid + 1):
-            for j in range(-n_grid, +n_grid + 1):
-                center = (grid_spacing * i, grid_spacing * j)
-                fr = rotate((center[0] - grid_length, center[1]))
-                to = rotate((center[0] + grid_length, center[1]))
-                pygame.draw.line(surf, grid_color, coord(fr), coord(to), grid_width)
-                fr = rotate((center[0], center[1] - grid_length))
-                to = rotate((center[0], center[1] + grid_length))
-                pygame.draw.line(surf, grid_color, coord(fr), coord(to), grid_width)
-        for circ in circles:
-            c = (circle_scale * circ[0], circle_scale * circ[1])
-            if show:
-                col = (150, 150, 0)
-                pygame.draw.circle(surf, col, coord(c), circle_radius, 0)
-            else:
-                step = 150 / disapp_frames
-                lev = max(0, 150 - frames * step)
-                col = (lev, lev, 0)
-                if lev > 0:
+        # Stimulus display
+        t0 = pygame.time.get_ticks()
+        done = False
+        while not done:
+            for event in pygame.event.get():
+                if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+                    done = True
+                elif event.type == MOUSEBUTTONDOWN:
+                    s, show = 0, False
+                elif event.type == MOUSEBUTTONUP: 
+                    frames, show = 0, True
+    
+            surf.fill(bg_color)
+            t = (pygame.time.get_ticks() - t0) / 1000.0
+            set_rotation(rotation_speed * t)
+            for i in range(-n_grid, +n_grid + 1):
+                for j in range(-n_grid, +n_grid + 1):
+                    center = (grid_spacing * i, grid_spacing * j)
+                    fr = rotate((center[0] - grid_length, center[1]))
+                    to = rotate((center[0] + grid_length, center[1]))
+                    pygame.draw.line(surf, grid_color, coord(fr), coord(to), grid_width)
+                    fr = rotate((center[0], center[1] - grid_length))
+                    to = rotate((center[0], center[1] + grid_length))
+                    pygame.draw.line(surf, grid_color, coord(fr), coord(to), grid_width)
+            for circ in circles:
+                c = (circle_scale * circ[0], circle_scale * circ[1])
+                if show:
+                    col = (150, 150, 0)
                     pygame.draw.circle(surf, col, coord(c), circle_radius, 0)
-                    
-        pygame.draw.circle(surf, grid_color, coord((0, 0)), fix_radius)
-        pygame.display.flip()
-        frames += 1
-        
-        
-finally: 
-    pygame.quit()
+                else:
+                    step = 150 / disapp_frames
+                    lev = max(0, 150 - frames * step)
+                    col = (lev, lev, 0)
+                    if lev > 0:
+                        pygame.draw.circle(surf, col, coord(c), circle_radius, 0)
+                        
+            pygame.draw.circle(surf, grid_color, coord((0, 0)), fix_radius)
+            pygame.display.flip()
+            frames += 1
+            
+            
+    finally: 
+        pygame.quit()
 
