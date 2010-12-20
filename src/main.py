@@ -20,21 +20,31 @@ from illusions import exp2
 import os
 
 try:
-    # demandons le nom du sujet ; noue l'écrirons dans le fichier de données
-    subj = raw_input("nom du sujet (lettres seulement, pas d'espaces): ")
+    # Ask the subject's name
+    subject_name = raw_input("Nom du sujet (lettres seulement, pas d'espaces): ")
     
     # Create a new result file and write it to disk. We could have also append.
     i = 1
     while True:
-        filename = subj + str(i)
+        filename = subject_name + str(i)
         if not os.path.isfile(filename): break
         i += 1
-    resultFile = open(filename, "w")
+    result_file = open(filename, "w")
     
+    # Set the experiments' environment
+    experiment_env = {}
+    experiment_env["subject_name"] = subject_name
+    experiment_env["experiment_number"] = 1
+    experiment_env["result_file"] = result_file
+    experiment_env["separator"] = ','
+    
+    # Write result file's headers
+    result_file.write('SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] +'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + '\n')
+        
     # Call experiments
-    full_screen = False
-    exp1.exp1(full_screen, resultFile)
-    exp2.exp2(full_screen, resultFile)
+    full_screen = False    
+    exp1.exp1(full_screen, experiment_env)
+    exp2.exp2(full_screen, experiment_env)
     
 finally:
     a = 1

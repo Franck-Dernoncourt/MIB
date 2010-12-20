@@ -53,8 +53,26 @@ def rotate(point):
     return (g_cos * point[0] + g_sin * point[1], -g_sin * point[0] + g_cos * point[1])
 
 
+# Get keystrokes
+# The list of event.key can be found here: http://nullege.com/codes/show/src%40g%40o%40Golem-HEAD%40golem%40viewers%40Pygame.py/159/pygame.K_LCTRL/python
+def get_subject_answer(show, frames, experiment_env, timestamp):
+    for event in pygame.event.get():
+        if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+            return True, frames, show
+        elif event.type == MOUSEBUTTONDOWN:
+            return False, 0, False
+        elif event.type == MOUSEBUTTONUP: 
+            return False, 0, True
+        elif (event.type == KEYDOWN and event.key == K_1):
+            # Write result file's headers        
+            experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n') 
+            return False, frames, show 
+            
+    return False, frames, show 
+
+
 # Main function
-def exp1(full_screen, resultFile):
+def exp1(full_screen, experiment_env):
     frames, show = 0, True
     try:
         pygame.init()
@@ -69,14 +87,7 @@ def exp1(full_screen, resultFile):
         t0 = pygame.time.get_ticks()
         done = False
         while not done:
-            for event in pygame.event.get():
-                if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                    done = True
-                elif event.type == MOUSEBUTTONDOWN:
-                    s, show = 0, False
-                elif event.type == MOUSEBUTTONUP: 
-                    frames, show = 0, True
-    
+            done, frames, show = get_subject_answer(show, frames, experiment_env, pygame.time.get_ticks() - t0)   
             surf.fill(bg_color)
             t = (pygame.time.get_ticks() - t0) / 1000.0
             set_rotation(rotation_speed * t)

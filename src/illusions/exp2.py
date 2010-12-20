@@ -61,7 +61,7 @@ def rotate_y(point):
             point[1],\
             -g_sin*point[1] + g_cos*point[2])
 
-def exp2(full_screen, resultFile):
+def exp2(full_screen, experiment_env):
     # initialize random points on sphere
     dots = []
     for i in range(n_dots):
