@@ -17,8 +17,7 @@
 from illusions import exp1
 from illusions import exp2
 
-import os
-import sys, random, pygame
+import os, pygame
 from pygame.locals import *
 
 
@@ -40,6 +39,9 @@ try:
     experiment_env["experiment_number"] = 1
     experiment_env["result_file"] = result_file
     experiment_env["separator"] = ','
+    experiment_env["variant"] = ''
+    
+    
     
     # Write result file's headers
     result_file.write('SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] +'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + '\n')
@@ -54,7 +56,9 @@ try:
         surf = pygame.display.set_mode(window_size)
         
     # Call experiments
-    exp1.exp1(full_screen, experiment_env, surf)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed")
+    exp1.exp1(full_screen, experiment_env, surf, "same_dir")
+    exp1.exp1(full_screen, experiment_env, surf, "opp_dir")
     exp2.exp2(full_screen, experiment_env, surf)
     
 finally:
