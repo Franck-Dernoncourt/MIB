@@ -18,6 +18,9 @@ from illusions import exp1
 from illusions import exp2
 
 import os
+import sys, random, pygame
+from pygame.locals import *
+
 
 try:
     # Ask the subject's name
@@ -41,10 +44,18 @@ try:
     # Write result file's headers
     result_file.write('SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] +'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + '\n')
         
-    # Call experiments
+    # Graphics initializations
     full_screen = False    
-    exp1.exp1(full_screen, experiment_env)
-    exp2.exp2(full_screen, experiment_env)
+    window_size = (1024, 768)
+    pygame.init()      
+    if full_screen:
+        surf = pygame.display.set_mode(window_size, HWSURFACE | FULLSCREEN | DOUBLEBUF)
+    else:
+        surf = pygame.display.set_mode(window_size)
+        
+    # Call experiments
+    exp1.exp1(full_screen, experiment_env, surf)
+    exp2.exp2(full_screen, experiment_env, surf)
     
 finally:
     a = 1

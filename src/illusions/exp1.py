@@ -18,8 +18,9 @@ import sys, random, pygame
 from pygame.locals import *
 from math import *
 
-# Parameters definition
 window_size = (1024, 768)
+
+# Parameters definition
 circles = ((0, 1),)
 circle_scale = 0.3
 circle_radius = 8
@@ -66,23 +67,16 @@ def get_subject_answer(show, frames, experiment_env, timestamp):
         elif (event.type == KEYDOWN and event.key == K_1):
             # Write result file's headers        
             experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n') 
-            return False, frames, show 
+            return True, frames, show 
             
     return False, frames, show 
 
 
 # Main function
-def exp1(full_screen, experiment_env):
+def exp1(full_screen, experiment_env, surf):
     frames, show = 0, True
-    try:
-        pygame.init()
-        
-        # Graphics initializations
-        if full_screen:
-            surf = pygame.display.set_mode(window_size, HWSURFACE | FULLSCREEN | DOUBLEBUF)
-        else:
-            surf = pygame.display.set_mode(window_size)
     
+    try:    
         # Stimulus display
         t0 = pygame.time.get_ticks()
         done = False
@@ -118,5 +112,5 @@ def exp1(full_screen, experiment_env):
             
             
     finally: 
-        pygame.quit()
+        print "quit"
 

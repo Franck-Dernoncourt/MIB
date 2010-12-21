@@ -61,7 +61,7 @@ def rotate_y(point):
             point[1],\
             -g_sin*point[1] + g_cos*point[2])
 
-def exp2(full_screen, experiment_env):
+def exp2(full_screen, experiment_env, surf):
     # initialize random points on sphere
     dots = []
     for i in range(n_dots):
@@ -69,12 +69,6 @@ def exp2(full_screen, experiment_env):
     
    
     try:
-        pygame.init()
-        # graphics initializations
-        if full_screen:
-            surf = pygame.display.set_mode(window_size, HWSURFACE | FULLSCREEN | DOUBLEBUF)
-        else:
-            surf = pygame.display.set_mode(window_size)
     
         t0 = pygame.time.get_ticks()
         frames = 0
@@ -99,5 +93,5 @@ def exp2(full_screen, experiment_env):
             
     finally:
         t = (pygame.time.get_ticks() - t0)/1000.0
-        print float(pygame.time.get_ticks() - t0)/frames, "msec/frame"
-        pygame.quit()
+        #print float(pygame.time.get_ticks() - t0)/frames, "msec/frame"
+        print "quit"
