@@ -19,7 +19,7 @@ import random, pygame
 from pygame.locals import *
 from math import *
 
-
+# Parameters definition
 window_size = (1024, 768)
 circles = ((0, 1), (sqrt(3)/2, -0.5), (-sqrt(3)/2, -0.5))
 circle_scale = 0.3
