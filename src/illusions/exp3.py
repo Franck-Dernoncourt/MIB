@@ -36,7 +36,7 @@ window_scale = min(window_size)/2.0
 grid_spacing = 0.2
 grid_length = 0.05
 grid_lines_width = 1
-grid_color = (100, 100, 255)
+grid_color = circle_color
 
 
 # Takes real coordinates, returns pixel coordinates
@@ -93,14 +93,23 @@ def exp3(full_screen, experiment_env, surf, object_type):
             
             # Display grid
             set_rotation(0)
-            grid_width = 0.05
-            grid_height = 0.05
-            grid_width_in_lines = 3
-            grid_height_in_lines = 3
-            grid_center = (-0.5, 0.5)
-            grid_space_width = grid_width / (grid_width_in_lines - 1)
-            grid_space_height = grid_height / (grid_height_in_lines - 1)        
             
+            if object_type == "object":
+                grid_width = 0.05
+                grid_height = 0.05
+                grid_width_in_lines = 3
+                grid_height_in_lines = 3
+                grid_center = (-0.5, 0.5)
+                
+            else:
+                grid_width = 2
+                grid_height = 2
+                grid_width_in_lines = 200
+                grid_height_in_lines = 200
+                grid_center = (-1, 1)
+            
+            grid_space_width = float(grid_width) / (grid_width_in_lines - 1)
+            grid_space_height = float(grid_height) / (grid_height_in_lines - 1)
             for line_x in range(grid_width_in_lines):                
                 fr = (grid_center[0] - grid_width / 2.0 + line_x * grid_space_width, grid_center[1] - grid_height / 2.0)
                 to = (grid_center[0] - grid_width / 2.0 + line_x * grid_space_width, grid_center[1] + grid_height / 2.0)
@@ -109,6 +118,12 @@ def exp3(full_screen, experiment_env, surf, object_type):
                 fr = (grid_center[0] - grid_width / 2.0, grid_center[1] - grid_height / 2.0 + line_y * grid_space_height)
                 to = (grid_center[0] + grid_width / 2.0, grid_center[1] - grid_height / 2.0 + line_y * grid_space_height)
                 pygame.draw.line(surf, grid_color, coord(fr), coord(to), grid_lines_width)
+            
+            if object_type == "hole":
+                hole_radius = 10
+                hole_color = (0, 0, 0)
+                hole_center = (-0.5, 0.5)
+                pygame.draw.circle(surf, hole_color, coord(hole_center), hole_radius, 0)
                 
             # Display everything
             pygame.display.flip()
