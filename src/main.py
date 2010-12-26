@@ -62,6 +62,10 @@ try:
     exp2.exp2(full_screen, experiment_env, surf)
     exp3.exp3(full_screen, experiment_env, surf, "object")
     exp3.exp3(full_screen, experiment_env, surf, "hole")
+    exp3.exp3(full_screen, experiment_env, surf, "luminance_cycle")
+    exp3.exp3(full_screen, experiment_env, surf, "luminance_control")
+    
     
 finally:
     pygame.quit()
+    result_file.close()
