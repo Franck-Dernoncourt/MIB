@@ -61,11 +61,14 @@ try:
     exp1.exp1(full_screen, experiment_env, surf, "fixed")
     exp1.exp1(full_screen, experiment_env, surf, "same_dir")
     exp1.exp1(full_screen, experiment_env, surf, "opp_dir")
+    experiment_env["experiment_number"] = 2
     exp2.exp2(full_screen, experiment_env, surf)
+    experiment_env["experiment_number"] = 3
     exp3.exp3(full_screen, experiment_env, surf, "object")
     exp3.exp3(full_screen, experiment_env, surf, "hole")
     exp3.exp3(full_screen, experiment_env, surf, "luminance_cycle")
     exp3.exp3(full_screen, experiment_env, surf, "luminance_control")
+    experiment_env["experiment_number"] = 4
     exp4.exp4(full_screen, experiment_env, surf, "luminance_distortion")
     exp4.exp4(full_screen, experiment_env, surf, "contraction_distortion")
     exp4.exp4(full_screen, experiment_env, surf, "expansion_distortion")

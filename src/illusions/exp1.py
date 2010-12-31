@@ -64,13 +64,13 @@ def get_subject_answer(show, frames, experiment_env, timestamp):
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
             return True, frames, show
         elif event.type == MOUSEBUTTONDOWN:
-            return False, 0, False
+            return True, 0, False
         elif event.type == MOUSEBUTTONUP: 
             return False, 0, True
         elif (event.type == KEYDOWN and event.key == K_1):
             # Write result file's headers        
             experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n') 
-            return True, frames, show 
+            return False, frames, show 
             
     return False, frames, show 
 

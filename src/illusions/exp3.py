@@ -71,8 +71,13 @@ def exp3(full_screen, experiment_env, surf, object_type):
         done = False
         while not done:
             for event in pygame.event.get():
-                if event.type in (QUIT, KEYDOWN, MOUSEBUTTONDOWN):
+                if event.type in (QUIT, MOUSEBUTTONDOWN):
                     done = True 
+                if (event.type == KEYDOWN and event.key == K_1):
+                    # Write result file's headers    
+                    timestamp = pygame.time.get_ticks() - t0    
+                    experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n') 
+           
                     
             surf.fill(bg_color)
             t = (pygame.time.get_ticks() - t0)/1000.0
