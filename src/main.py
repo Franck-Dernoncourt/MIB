@@ -17,6 +17,8 @@
 from illusions import exp1
 from illusions import exp2
 from illusions import exp3
+from illusions import exp4
+
 
 import os, pygame
 from pygame.locals import *
@@ -47,7 +49,7 @@ try:
     result_file.write('SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] +'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + '\n')
         
     # Graphics initializations
-    full_screen = True    
+    full_screen = False    
     window_size = (1024, 768)
     pygame.init()      
     if full_screen:
@@ -64,6 +66,11 @@ try:
     exp3.exp3(full_screen, experiment_env, surf, "hole")
     exp3.exp3(full_screen, experiment_env, surf, "luminance_cycle")
     exp3.exp3(full_screen, experiment_env, surf, "luminance_control")
+    exp4.exp4(full_screen, experiment_env, surf, "luminance_distortion")
+    exp4.exp4(full_screen, experiment_env, surf, "contraction_distortion")
+    exp4.exp4(full_screen, experiment_env, surf, "expansion_distortion")
+    exp4.exp4(full_screen, experiment_env, surf, "curvature_distortion")
+    exp4.exp4(full_screen, experiment_env, surf, "color_distortion")
     
     
 finally:
