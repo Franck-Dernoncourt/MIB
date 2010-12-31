@@ -75,7 +75,10 @@ def exp4(full_screen, experiment_env, surf, distortion_type):
     try:
         t0 = pygame.time.get_ticks()
         frames = 0
-        start_key_down = 0
+        start_key_down = {}
+        start_key_down['K_1'] = 0
+        start_key_down['K_2'] = 0
+        start_key_down['K_3'] = 0
         initial_id_answer = experiment_env["id_answer"]
         done = False
         t = 0

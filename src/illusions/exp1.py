@@ -58,49 +58,26 @@ def rotate(point):
     return (g_cos * point[0] + g_sin * point[1], -g_sin * point[0] + g_cos * point[1])
 
 
-# Get keystrokes
-# The list of event.key can be found here: http://nullege.com/codes/show/src%40g%40o%40Golem-HEAD%40golem%40viewers%40Pygame.py/159/pygame.K_LCTRL/python
-start_key_down = 0
-def get_subject_answer(show, frames, experiment_env, timestamp, duration, shift_type):
-    global start_key_down
-    for event in pygame.event.get():
-        if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-            return True, frames, show
-        elif event.type == MOUSEBUTTONDOWN:
-            return True, 0, False
-        elif event.type == MOUSEBUTTONUP: 
-            return False, 0, True
-        elif (event.type == KEYDOWN and event.key == K_1):
-            # Write result file's headers        
-            #experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + shift_type + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + experiment_env["separator"] + str(duration) + '\n')
-            start_key_down = timestamp
-            return False, frames, show 
-        elif (event.type == KEYUP and event.key == K_1):
-            # Write result file's headers
-            if duration > 0:
-                experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + shift_type + experiment_env["separator"] + '1' + experiment_env["separator"] + str(start_key_down) + experiment_env["separator"] + str(duration) + '\n')
-                experiment_env["id_answer"] += 1 
-            return False, frames, show 
-            
-    return False, frames, show 
-
-
-
 # Main function
 def exp1(full_screen, experiment_env, surf, shift_type):
     frames, show = 0, True
     shift = 0
-    #start_key_down = 0
+    start_key_down = {}
+    start_key_down['K_1'] = 0
+    start_key_down['K_2'] = 0
+    start_key_down['K_3'] = 0
     direction = 'right'
     initial_id_answer = experiment_env["id_answer"]
     
     try:    
-        # Stimulus display
+        ## Stimulus display
         t0 = pygame.time.get_ticks()
         t = 0
         done = False
         while (not done) and t < float(experiment_env["exp_duration"]):
-            done, frames, show = get_subject_answer(show, frames, experiment_env, pygame.time.get_ticks() - t0, pygame.time.get_ticks() - t0 - start_key_down, shift_type)   
+            
+            done, start_key_down = exp_events_handle(experiment_env, shift_type, start_key_down, t0)  
+               
             surf.fill(bg_color)
             t = (pygame.time.get_ticks() - t0) / 1000.0
             set_rotation(rotation_speed * t)

@@ -65,7 +65,10 @@ def rotate_y(point):
 def exp2(full_screen, experiment_env, surf, exp_type):
     # initialize random points on sphere
     dots = []
-    start_key_down = 0
+    start_key_down = {}
+    start_key_down['K_1'] = 0
+    start_key_down['K_2'] = 0
+    start_key_down['K_3'] = 0
     initial_id_answer = experiment_env["id_answer"]
     for i in range(n_dots):
         dots.append(random_point())
