@@ -68,16 +68,14 @@ def rotate(point, rotation_number = 0):
 def exp3(full_screen, experiment_env, surf, object_type):
     try:
         t0 = pygame.time.get_ticks()
+        t = 0
         frames = 0
+        start_key_down = 0
+        initial_id_answer = experiment_env["id_answer"]
         done = False
-        while not done:
-            for event in pygame.event.get():
-                if event.type in (QUIT, MOUSEBUTTONDOWN):
-                    done = True 
-                if (event.type == KEYDOWN and event.key == K_1):
-                    # Write result file's headers    
-                    timestamp = pygame.time.get_ticks() - t0    
-                    experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n') 
+        while (not done) and t < float(experiment_env["exp_duration"]):
+            
+            done, start_key_down = exp_events_handle(experiment_env, object_type, start_key_down, t0) 
            
                     
             surf.fill(bg_color)
@@ -169,6 +167,9 @@ def exp3(full_screen, experiment_env, surf, object_type):
             ## Display everything 
             pygame.display.flip()
             frames += 1
+            
+        ## Ending experiment
+        experiment_end(experiment_env, object_type, initial_id_answer)
     
     
     finally:

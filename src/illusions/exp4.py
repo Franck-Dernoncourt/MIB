@@ -75,17 +75,14 @@ def exp4(full_screen, experiment_env, surf, distortion_type):
     try:
         t0 = pygame.time.get_ticks()
         frames = 0
+        start_key_down = 0
+        initial_id_answer = experiment_env["id_answer"]
         done = False
-        while not done:
-            for event in pygame.event.get():
-                if event.type in (QUIT, MOUSEBUTTONDOWN):
-                    done = True 
-                if (event.type == KEYDOWN and event.key == K_1):
-                    # Write result file's headers    
-                    timestamp = pygame.time.get_ticks() - t0    
-                    experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n') 
+        t = 0
+        while (not done) and t < float(experiment_env["exp_duration"]):
+            
+            done, start_key_down = exp_events_handle(experiment_env, distortion_type, start_key_down, t0)   
            
-                  
             surf.fill(bg_color)  
             t = (pygame.time.get_ticks() - t0)/2000.0
             set_rotation(rotation_speed * t)
@@ -122,6 +119,9 @@ def exp4(full_screen, experiment_env, surf, distortion_type):
             ## Display everything 
             pygame.display.flip()
             frames += 1
+            
+        ## Ending experiment
+        experiment_end(experiment_env, distortion_type, initial_id_answer)
     
     
     finally:

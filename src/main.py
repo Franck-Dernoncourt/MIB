@@ -64,7 +64,7 @@ try:
     exp1.exp1(full_screen, experiment_env, surf, "same_dir")
     exp1.exp1(full_screen, experiment_env, surf, "opp_dir")
     experiment_env["experiment_number"] = 2
-    exp2.exp2(full_screen, experiment_env, surf)
+    exp2.exp2(full_screen, experiment_env, surf, "normal")
     experiment_env["experiment_number"] = 3
     exp3.exp3(full_screen, experiment_env, surf, "object")
     exp3.exp3(full_screen, experiment_env, surf, "hole")

@@ -62,27 +62,23 @@ def rotate_y(point):
             point[1],\
             -g_sin*point[1] + g_cos*point[2])
 
-def exp2(full_screen, experiment_env, surf):
+def exp2(full_screen, experiment_env, surf, exp_type):
     # initialize random points on sphere
     dots = []
+    start_key_down = 0
+    initial_id_answer = experiment_env["id_answer"]
     for i in range(n_dots):
         dots.append(random_point())
     
-   
     try:
     
         t0 = pygame.time.get_ticks()
+        t = 0
         frames = 0
         done = False
-        while not done:
-            for event in pygame.event.get():
-                if event.type in (QUIT, MOUSEBUTTONDOWN):
-                    done = True
-                if (event.type == KEYDOWN and event.key == K_1):
-                    # Write result file's headers    
-                    timestamp = pygame.time.get_ticks() - t0    
-                    experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n') 
-           
+        while (not done) and t < float(experiment_env["exp_duration"]):
+            
+            done, start_key_down = exp_events_handle(experiment_env, exp_type, start_key_down, t0)            
     
             surf.fill(bg_color)
             t = (pygame.time.get_ticks() - t0)/1000.0
@@ -96,6 +92,9 @@ def exp2(full_screen, experiment_env, surf):
                 pygame.draw.circle(surf, circle_color, coord(c), circle_radius, 0)
             pygame.display.flip()
             frames += 1
+            
+        ## Ending experiment
+        experiment_end(experiment_env, exp_type, initial_id_answer)
             
     finally:
         t = (pygame.time.get_ticks() - t0)/1000.0

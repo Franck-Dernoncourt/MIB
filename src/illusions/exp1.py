@@ -150,7 +150,7 @@ def exp1(full_screen, experiment_env, surf, shift_type):
                     direction = 'right'     
                     
                     
-        # Ending experiment
+        ## Ending experiment
         experiment_end(experiment_env, shift_type, initial_id_answer)
             
     finally: 
