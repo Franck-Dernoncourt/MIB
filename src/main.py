@@ -43,10 +43,12 @@ try:
     experiment_env["result_file"] = result_file
     experiment_env["separator"] = ','
     experiment_env["variant"] = ''
+    experiment_env["exp_duration"] = 5
+    experiment_env["id_answer"] = 0
        
     
     # Write result file's headers
-    result_file.write('SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] +'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + '\n')
+    result_file.write('IDANSWER' + experiment_env["separator"] + 'SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] + 'TYPE' + experiment_env["separator"] + 'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + experiment_env["separator"] + 'DURATION' + '\n')
         
     # Graphics initializations
     full_screen = False    

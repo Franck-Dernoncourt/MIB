@@ -18,6 +18,7 @@
 import random, pygame
 from pygame.locals import *
 from math import *
+from utils import *
 
 # Parameters definition
 window_size = (1024, 768)

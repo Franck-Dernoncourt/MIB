@@ -17,6 +17,7 @@
 import sys, random, pygame
 from pygame.locals import *
 from math import *
+from utils import *
 
 window_size = (1024, 768)
 
@@ -59,7 +60,9 @@ def rotate(point):
 
 # Get keystrokes
 # The list of event.key can be found here: http://nullege.com/codes/show/src%40g%40o%40Golem-HEAD%40golem%40viewers%40Pygame.py/159/pygame.K_LCTRL/python
-def get_subject_answer(show, frames, experiment_env, timestamp):
+start_key_down = 0
+def get_subject_answer(show, frames, experiment_env, timestamp, duration, shift_type):
+    global start_key_down
     for event in pygame.event.get():
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
             return True, frames, show
@@ -69,7 +72,14 @@ def get_subject_answer(show, frames, experiment_env, timestamp):
             return False, 0, True
         elif (event.type == KEYDOWN and event.key == K_1):
             # Write result file's headers        
-            experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n') 
+            #experiment_env["result_file"].write(experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + shift_type + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + experiment_env["separator"] + str(duration) + '\n')
+            start_key_down = timestamp
+            return False, frames, show 
+        elif (event.type == KEYUP and event.key == K_1):
+            # Write result file's headers
+            if duration > 0:
+                experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + shift_type + experiment_env["separator"] + '1' + experiment_env["separator"] + str(start_key_down) + experiment_env["separator"] + str(duration) + '\n')
+                experiment_env["id_answer"] += 1 
             return False, frames, show 
             
     return False, frames, show 
@@ -80,17 +90,19 @@ def get_subject_answer(show, frames, experiment_env, timestamp):
 def exp1(full_screen, experiment_env, surf, shift_type):
     frames, show = 0, True
     shift = 0
+    #start_key_down = 0
     direction = 'right'
+    initial_id_answer = experiment_env["id_answer"]
     
     try:    
         # Stimulus display
         t0 = pygame.time.get_ticks()
+        t = 0
         done = False
-        while not done:
-            done, frames, show = get_subject_answer(show, frames, experiment_env, pygame.time.get_ticks() - t0)   
+        while (not done) and t < float(experiment_env["exp_duration"]):
+            done, frames, show = get_subject_answer(show, frames, experiment_env, pygame.time.get_ticks() - t0, pygame.time.get_ticks() - t0 - start_key_down, shift_type)   
             surf.fill(bg_color)
             t = (pygame.time.get_ticks() - t0) / 1000.0
-            
             set_rotation(rotation_speed * t)
             for i in range(-n_grid, +n_grid + 1):
                 for j in range(-n_grid, +n_grid + 1):
@@ -135,7 +147,11 @@ def exp1(full_screen, experiment_env, surf, shift_type):
                 if shift > right_max_shift:
                     direction = 'left'
                 if shift <= left_max_shift:
-                    direction = 'right'            
+                    direction = 'right'     
+                    
+                    
+        # Ending experiment
+        experiment_end(experiment_env, shift_type, initial_id_answer)
             
     finally: 
         print "quit"
