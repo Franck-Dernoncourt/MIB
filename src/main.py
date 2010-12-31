@@ -18,17 +18,25 @@ from illusions import exp1
 from illusions import exp2
 from illusions import exp3
 from illusions import exp4
-
+from userinput import *
 
 import os, pygame
 from pygame.locals import *
 
 
-try:
-    # Ask the subject's name
-    subject_name = raw_input("Nom du sujet (lettres seulement, pas d'espaces): ")
+try: 
+    # Graphics initializations
+    full_screen = False    
+    window_size = (1024, 768)
+    pygame.init()      
+    if full_screen:
+        surf = pygame.display.set_mode(window_size, HWSURFACE | FULLSCREEN | DOUBLEBUF)
+    else:
+        surf = pygame.display.set_mode(window_size)
+
     
     # Create a new result file and write it to disk. We could have also append.
+    subject_name = ask(surf, "Name:")
     i = 1
     while True:
         filename = subject_name + str(i)
@@ -45,20 +53,11 @@ try:
     experiment_env["variant"] = ''
     experiment_env["exp_duration"] = 5
     experiment_env["id_answer"] = 0
-       
     
     # Write result file's headers
     result_file.write('IDANSWER' + experiment_env["separator"] + 'SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] + 'TYPE' + experiment_env["separator"] + 'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + experiment_env["separator"] + 'DURATION' + '\n')
-        
-    # Graphics initializations
-    full_screen = False    
-    window_size = (1024, 768)
-    pygame.init()      
-    if full_screen:
-        surf = pygame.display.set_mode(window_size, HWSURFACE | FULLSCREEN | DOUBLEBUF)
-    else:
-        surf = pygame.display.set_mode(window_size)
-         
+    
+    
     # Call experiments
     exp1.exp1(full_screen, experiment_env, surf, "fixed", 0.5, 0.5, 3)
     exp1.exp1(full_screen, experiment_env, surf, "fixed", 0.5, 1, 3)
@@ -66,8 +65,7 @@ try:
     exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 0.5, 3)
     exp1.exp1(full_screen, experiment_env, surf, "fixed", 1.5, 1.5, 3)
     exp1.exp1(full_screen, experiment_env, surf, "fixed", 1.5, 1.5, 0.5)
-    
-    
+        
     exp1.exp1(full_screen, experiment_env, surf, "same_dir")
     exp1.exp1(full_screen, experiment_env, surf, "opp_dir")
     experiment_env["experiment_number"] = 2
@@ -87,4 +85,4 @@ try:
     
 finally:
     pygame.quit()
-    result_file.close()
+    #result_file.close()
