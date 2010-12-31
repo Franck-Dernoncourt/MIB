@@ -59,7 +59,7 @@ def rotate(point):
 
 
 # Main function
-def exp1(full_screen, experiment_env, surf, shift_type):
+def exp1(full_screen, experiment_env, surf, shift_type, luminosity = 1, rotation_speed_factor = 1, circle_radius_factor = 1):
     frames, show = 0, True
     shift = 0
     start_key_down = {}
@@ -68,6 +68,7 @@ def exp1(full_screen, experiment_env, surf, shift_type):
     start_key_down['K_3'] = 0
     direction = 'right'
     initial_id_answer = experiment_env["id_answer"]
+    shift_type_param = shift_type + '-' + str(luminosity) + '-' + str(rotation_speed_factor) + '-' + str(circle_radius_factor)
     
     try:    
         ## Stimulus display
@@ -76,11 +77,11 @@ def exp1(full_screen, experiment_env, surf, shift_type):
         done = False
         while (not done) and t < float(experiment_env["exp_duration"]):
             
-            done, start_key_down = exp_events_handle(experiment_env, shift_type, start_key_down, t0)  
+            done, start_key_down = exp_events_handle(experiment_env, shift_type_param, start_key_down, t0)  
                
             surf.fill(bg_color)
             t = (pygame.time.get_ticks() - t0) / 1000.0
-            set_rotation(rotation_speed * t)
+            set_rotation(rotation_speed * t * rotation_speed_factor)
             for i in range(-n_grid, +n_grid + 1):
                 for j in range(-n_grid, +n_grid + 1):
                     center = (grid_spacing * i, grid_spacing * j)
@@ -92,16 +93,21 @@ def exp1(full_screen, experiment_env, surf, shift_type):
                     pygame.draw.line(surf, grid_color, coord(fr), coord(to), grid_width)
                     
             for circ in circles:
-                c = (circle_scale * circ[0] + shift / 1000.0 - 0.35, circle_scale * circ[1])
+                c1 = (circle_scale * circ[0] + shift / 1000.0 - 0.35, circle_scale * circ[1])
+                c2 = (circle_scale * circ[0] + shift / 1000.0 + 0.35, circle_scale * circ[1])
+                c3 = (0, -circle_scale * circ[1])
                 if show:
-                    col = (150, 150, 0)
-                    pygame.draw.circle(surf, col, coord(c), circle_radius, 0)
+                    col = (150*luminosity, 150*luminosity, 0)
+                    pygame.draw.circle(surf, col, coord(c1), circle_radius*circle_radius_factor, 0)
+                    if shift_type == 'fixed':
+                        pygame.draw.circle(surf, col, coord(c2), circle_radius*circle_radius_factor, 0)
+                        pygame.draw.circle(surf, col, coord(c3), circle_radius*circle_radius_factor, 0)
                 else:
                     step = 150 / disapp_frames
                     lev = max(0, 150 - frames * step)
                     col = (lev, lev, 0)
                     if lev > 0:
-                        pygame.draw.circle(surf, col, coord(c), circle_radius, 0)
+                        pygame.draw.circle(surf, col, coord(c1), circle_radius, 0)
                         
             if shift_type == 'same_dir':
                 pygame.draw.circle(surf, grid_color, coord((0 + shift/1000.0, 0)), fix_radius)
