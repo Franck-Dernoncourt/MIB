@@ -108,12 +108,11 @@ def exp4(full_screen, experiment_env, surf, distortion_type):
                             to = (fr2[0], fr2[1] + (1 / float(grid_height_points * grid_height) - grid_space_height) * ratio / 2 )
                         elif distortion_type == 'expansion_distortion':
                             grid_lines_width = min([round(1/(ratio/2.5+0.02)), 7])
-                            print grid_lines_width
                         elif distortion_type == 'curvature_distortion':
                             a = 1
                         elif distortion_type == 'color_distortion':
-                            grid_color = ((255-ratio*255)/1.3, (255-ratio*255)/1.3, ratio*255)     
-                    pygame.draw.line(surf, grid_color, coord(fr2), coord(to), grid_lines_width)
+                            grid_color = (int((255-ratio*255)/1.3), int((255-ratio*255)/1.3), int(ratio*255))     
+                    pygame.draw.line(surf, grid_color, coord(fr2), coord(to), int(grid_lines_width))
                         
             
             ## Display the center square

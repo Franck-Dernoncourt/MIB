@@ -98,10 +98,10 @@ def exp1(full_screen, experiment_env, surf, shift_type, luminosity = 1, rotation
                 c3 = (0, -circle_scale * circ[1])
                 if show:
                     col = (150*luminosity, 150*luminosity, 0)
-                    pygame.draw.circle(surf, col, coord(c1), circle_radius*circle_radius_factor, 0)
+                    pygame.draw.circle(surf, col, coord(c1), int(circle_radius*circle_radius_factor), 0)
                     if shift_type == 'fixed':
-                        pygame.draw.circle(surf, col, coord(c2), circle_radius*circle_radius_factor, 0)
-                        pygame.draw.circle(surf, col, coord(c3), circle_radius*circle_radius_factor, 0)
+                        pygame.draw.circle(surf, col, coord(c2), int(circle_radius*circle_radius_factor), 0)
+                        pygame.draw.circle(surf, col, coord(c3), int(circle_radius*circle_radius_factor), 0)
                 else:
                     step = 150 / disapp_frames
                     lev = max(0, 150 - frames * step)

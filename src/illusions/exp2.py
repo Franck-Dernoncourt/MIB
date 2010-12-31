@@ -101,5 +101,4 @@ def exp2(full_screen, experiment_env, surf, exp_type):
             
     finally:
         t = (pygame.time.get_ticks() - t0)/1000.0
-        #print float(pygame.time.get_ticks() - t0)/frames, "msec/frame"
         print "quit"

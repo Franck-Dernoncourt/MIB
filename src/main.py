@@ -36,7 +36,7 @@ try:
 
     
     # Create a new result file and write it to disk. We could have also append.
-    subject_name = ask(surf, "Name:")
+    subject_name = ask(surf, "Name")
     i = 1
     while True:
         filename = subject_name + str(i)
