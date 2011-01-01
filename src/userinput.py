@@ -1,6 +1,9 @@
-# by Timothy Downs, inputbox written for my map editor
-# 2011-01-01 revision by Franck Dernoncourt <franck.dernoncourt@gmail.com> to make it compilable with pygame2exe.py (solve font issues)
-
+##############################################################################################################
+# 
+# 2002-01-23: Initial release by Timothy Downs, inputbox written for my map editor
+# 2011-01-01: Revision by Franck Dernoncourt <franck.dernoncourt@gmail.com> to make it compilable 
+#             with pygame2exe.py (solve font issues, see http://www.pygame.org/pcr/inputbox/index.php#MESSAGES)
+#
 # A program to get user input, allowing backspace etc
 # shown in a box in the middle of the screen
 # Called by:
@@ -8,6 +11,8 @@
 # answer = inputbox.ask(screen, "Your name")
 #
 # Only near the center of the screen is blitted to
+#
+##############################################################################################################
 
 import pygame, pygame.font, pygame.event, pygame.draw, string
 from pygame.locals import *
