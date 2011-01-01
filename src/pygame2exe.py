@@ -55,7 +55,7 @@ class BuildExe:
         self.project_name = "MIB"
  
         #Project url
-        self.project_url = "http://www.francky.me"
+        self.project_url = "http://sites.google.com/site/exphum/projets/motion-induced-blindness"
  
         #Version of program
         self.project_version = "1.0"
