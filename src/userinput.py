@@ -1,8 +1,5 @@
 # by Timothy Downs, inputbox written for my map editor
-
-# This program needs a little cleaning up
-# It ignores the shift key
-# And, for reasons of my own, this program converts "-" to "_"
+# 2011-01-01 revision by Franck Dernoncourt <franck.dernoncourt@gmail.com> to make it compilable with pygame2exe.py (solve font issues)
 
 # A program to get user input, allowing backspace etc
 # shown in a box in the middle of the screen
@@ -23,7 +20,10 @@ def get_key():
 
 def display_box(screen, message):
     "Print a message in a box in the middle of the screen"
-    fontobject = pygame.font.Font(None, 18)
+    #fontobject = pygame.font.Font(None, 18)
+    fontobject=pygame.font.SysFont('Arial', 18)
+    
+    
     pygame.draw.rect(screen, (0, 0, 0),
                    ((screen.get_width() / 2) - 100,
                     (screen.get_height() / 2) - 10,
@@ -39,16 +39,16 @@ def display_box(screen, message):
 
 def ask(screen, question):
     "ask(screen, question) -> answer"
-    pygame.font.init()
     current_string = []
     display_box(screen, question + ": " + string.join(current_string, ""))
     while True:
         inkey = get_key()
         if inkey == K_BACKSPACE:
             current_string = current_string[0:-1]
+            print "ok"
         elif inkey == K_RETURN:
             break
         elif inkey <= 127:
             current_string.append(chr(inkey))
-            display_box(screen, question + ": " + string.join(current_string, ""))
+        display_box(screen, question + ": " + string.join(current_string, ""))
     return string.join(current_string, "")
