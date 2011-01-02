@@ -25,9 +25,13 @@ def exp_events_handle(experiment_env, exp_type, start_key_down, t0):
     for event in pygame.event.get():
         if event.type in (QUIT, MOUSEBUTTONDOWN):
             done = True
+        elif (event.type == KEYDOWN and event.key == K_ESCAPE):
+            pygame.quit()
+            sys.exit()
         elif (event.type == KEYDOWN and event.key == K_1):
             # Write result file's headers    
             timestamp = pygame.time.get_ticks() - t0
+            start_key_down['K_1'] = timestamp
             #experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '1' + experiment_env["separator"] + str(timestamp) + '\n')
         elif (event.type == KEYUP and event.key == K_1):
             # Write result file's headers
@@ -39,6 +43,7 @@ def exp_events_handle(experiment_env, exp_type, start_key_down, t0):
         elif (event.type == KEYDOWN and event.key == K_2):
             # Write result file's headers    
             timestamp = pygame.time.get_ticks() - t0
+            start_key_down['K_2'] = timestamp
             #experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '2' + experiment_env["separator"] + str(timestamp) + '\n')
         elif (event.type == KEYUP and event.key == K_2):
             # Write result file's headers
@@ -50,6 +55,7 @@ def exp_events_handle(experiment_env, exp_type, start_key_down, t0):
         elif (event.type == KEYDOWN and event.key == K_3):
             # Write result file's headers    
             timestamp = pygame.time.get_ticks() - t0
+            start_key_down['K_3'] = timestamp
             #experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + '3' + experiment_env["separator"] + str(timestamp) + '\n')
         elif (event.type == KEYUP and event.key == K_3):
             # Write result file's headers
