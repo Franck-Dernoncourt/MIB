@@ -53,7 +53,7 @@ def ask(screen, question):
             print "ok"
         elif inkey == K_RETURN:
             break
-        elif inkey <= 127:
+        elif 65 <= inkey <= 90 or 97 <= inkey <= 122: # Accept only letters
             current_string.append(chr(inkey))
         display_box(screen, question + ": " + string.join(current_string, ""))
     return string.join(current_string, "")
