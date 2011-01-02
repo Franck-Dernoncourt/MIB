@@ -59,13 +59,17 @@ try:
     
     
     # Call experiments
-    exp1.exp1(full_screen, experiment_env, surf, "fixed", 0.5, 0.5, 3)
-    exp1.exp1(full_screen, experiment_env, surf, "fixed", 0.5, 1, 3)
-    exp1.exp1(full_screen, experiment_env, surf, "fixed", 0.5, 1.5, 3)
-    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 0.5, 3)
-    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1.5, 1.5, 3)
-    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1.5, 1.5, 0.5)
-        
+    
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 0.5, 1)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 1)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1.5, 1)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 1)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 2)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 4)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 0.5, 1, 1)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 1)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1.5, 1, 1)
+    
     exp1.exp1(full_screen, experiment_env, surf, "same_dir")
     exp1.exp1(full_screen, experiment_env, surf, "opp_dir")
     experiment_env["experiment_number"] = 2
