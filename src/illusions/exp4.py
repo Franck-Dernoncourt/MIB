@@ -123,7 +123,7 @@ def exp4(full_screen, experiment_env, surf, distortion_type):
             frames += 1
             
         ## Ending experiment
-        experiment_end(experiment_env, distortion_type, initial_id_answer, surf)
+        experiment_end(experiment_env, distortion_type, initial_id_answer, surf, start_key_down, t0)
     
     
     finally:

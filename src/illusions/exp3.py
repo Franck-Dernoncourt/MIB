@@ -172,7 +172,7 @@ def exp3(full_screen, experiment_env, surf, object_type):
             frames += 1
             
         ## Ending experiment
-        experiment_end(experiment_env, object_type, initial_id_answer, surf)
+        experiment_end(experiment_env, object_type, initial_id_answer, surf, start_key_down, t0)
     
     
     finally:
