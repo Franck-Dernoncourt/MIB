@@ -69,7 +69,7 @@ def exp_events_handle(experiment_env, exp_type, start_key_down, t0):
 
 
 # Ending experiment
-def experiment_end(experiment_env, exp_type, initial_id_answer):
+def experiment_end(experiment_env, exp_type, initial_id_answer, surf):
     # Emptying event stack
     for event in pygame.event.get():
         pass
@@ -78,4 +78,9 @@ def experiment_end(experiment_env, exp_type, initial_id_answer):
     if initial_id_answer == experiment_env["id_answer"]:
         experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '-1' + experiment_env["separator"] + '-1' + experiment_env["separator"] + '-1' + '\n')
         experiment_env["id_answer"] += 1
+        
+    # Display black screen
+    surf.fill((0, 0, 0))
+    pygame.display.flip()
+    pygame.time.delay(2000)
          

@@ -97,7 +97,7 @@ def exp2(full_screen, experiment_env, surf, exp_type):
             frames += 1
             
         ## Ending experiment
-        experiment_end(experiment_env, exp_type, initial_id_answer)
+        experiment_end(experiment_env, exp_type, initial_id_answer, surf)
             
     finally:
         t = (pygame.time.get_ticks() - t0)/1000.0
