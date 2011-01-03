@@ -134,7 +134,7 @@ def exp1(full_screen, experiment_env, surf, shift_type, luminosity = 1, rotation
                     
                     
         ## Ending experiment
-        experiment_end(experiment_env, shift_type, initial_id_answer, surf)
+        experiment_end(experiment_env, shift_type_param, initial_id_answer, surf)
             
     finally: 
         print "quit"
