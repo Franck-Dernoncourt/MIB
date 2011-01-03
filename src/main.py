@@ -26,7 +26,7 @@ from pygame.locals import *
 
 try: 
     # Graphics initializations
-    full_screen = False    
+    full_screen = True    
     window_size = (1024, 768)
     pygame.init()      
     if full_screen:
@@ -51,7 +51,7 @@ try:
     experiment_env["result_file"] = result_file
     experiment_env["separator"] = ','
     experiment_env["variant"] = ''
-    experiment_env["exp_duration"] = 5
+    experiment_env["exp_duration"] = 30
     experiment_env["id_answer"] = 0
     
     # Write result file's headers
