@@ -36,7 +36,7 @@ def exp_events_handle(experiment_env, exp_type, start_key_down, t0):
         elif (event.type == KEYUP and event.key == K_1):
             # Write result file's headers
             duration = pygame.time.get_ticks() - t0 - start_key_down['K_1']
-            if duration > 0:
+            if duration > 0 and start_key_down['K_1'] > 0:
                 experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '1' + experiment_env["separator"] + str(start_key_down['K_1']) + experiment_env["separator"] + str(duration) + '\n')
                 experiment_env["id_answer"] += 1
         
@@ -48,7 +48,7 @@ def exp_events_handle(experiment_env, exp_type, start_key_down, t0):
         elif (event.type == KEYUP and event.key == K_2):
             # Write result file's headers
             duration = pygame.time.get_ticks() - t0 - start_key_down['K_2']
-            if duration > 0:
+            if duration > 0 and start_key_down['K_2'] > 0:
                 experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '2' + experiment_env["separator"] + str(start_key_down['K_2']) + experiment_env["separator"] + str(duration) + '\n')
                 experiment_env["id_answer"] += 1
                 
@@ -60,7 +60,7 @@ def exp_events_handle(experiment_env, exp_type, start_key_down, t0):
         elif (event.type == KEYUP and event.key == K_3):
             # Write result file's headers
             duration = pygame.time.get_ticks() - t0 - start_key_down['K_3']
-            if duration > 0:
+            if duration > 0 and start_key_down['K_3'] > 0:
                 experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '3' + experiment_env["separator"] + str(start_key_down['K_3']) + experiment_env["separator"] + str(duration) + '\n')
                 experiment_env["id_answer"] += 1
              
