@@ -26,7 +26,7 @@ from pygame.locals import *
 
 try: 
     # Graphics initializations
-    full_screen = False    
+    full_screen = True    
     window_size = (1024, 768)
     pygame.init()      
     if full_screen:
