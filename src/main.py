@@ -64,11 +64,9 @@ try:
     exp_arg_list = [('exp1', [full_screen, experiment_env, surf, "fixed", 1, 0.5, 1]),
                     ('exp1', [full_screen, experiment_env, surf, "fixed", 1, 1, 1]),
                     ('exp1', [full_screen, experiment_env, surf, "fixed", 1, 1.5, 1]),
-                    ('exp1', [full_screen, experiment_env, surf, "fixed", 1, 1, 1]),
                     ('exp1', [full_screen, experiment_env, surf, "fixed", 1, 1, 2]),
                     ('exp1', [full_screen, experiment_env, surf, "fixed", 1, 1, 4]),
                     ('exp1', [full_screen, experiment_env, surf, "fixed", 0.5, 1, 1]),
-                    ('exp1', [full_screen, experiment_env, surf, "fixed", 1, 1, 1]),
                     ('exp1', [full_screen, experiment_env, surf, "fixed", 1.5, 1, 1]),
                     ('exp1', [full_screen, experiment_env, surf, "same_dir"]),
                     ('exp1', [full_screen, experiment_env, surf, "opp_dir"]),
@@ -84,6 +82,7 @@ try:
     
     random.shuffle(exp_arg_list)
     
+    pygame.mouse.set_visible(False)
     for exp_arg in exp_arg_list:
         experiment_env["experiment_number"] = int(exp_arg[0][3])
         exp_map[exp_arg[0]](*exp_arg[1])
