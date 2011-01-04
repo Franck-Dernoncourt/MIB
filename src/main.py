@@ -83,6 +83,8 @@ try:
     random.shuffle(exp_arg_list)
     
     pygame.mouse.set_visible(False)
+    exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 1)
+    
     for exp_arg in exp_arg_list:
         experiment_env["experiment_number"] = int(exp_arg[0][3])
         exp_map[exp_arg[0]](*exp_arg[1])
