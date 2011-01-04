@@ -67,13 +67,13 @@ def exp_events_handle(experiment_env, exp_type, start_key_down, t0, record_key =
                 
     # Handle pressed keys
     if record_key == 'K_1':
-        experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '1' + experiment_env["separator"] + str(start_key_down['K_1']) + experiment_env["separator"] + '-1' + '\n')
+        experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '1' + experiment_env["separator"] + str(start_key_down['K_1']) + experiment_env["separator"] + '-2' + '\n')
         experiment_env["id_answer"] += 1
     if record_key == 'K_2':
-        experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '2' + experiment_env["separator"] + str(start_key_down['K_2']) + experiment_env["separator"] + '-1' + '\n')
+        experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '2' + experiment_env["separator"] + str(start_key_down['K_2']) + experiment_env["separator"] + '-2' + '\n')
         experiment_env["id_answer"] += 1
     if record_key == 'K_3':
-        experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '3' + experiment_env["separator"] + str(start_key_down['K_3']) + experiment_env["separator"] + '-1' + '\n')
+        experiment_env["result_file"].write(str(experiment_env["id_answer"]) + experiment_env["separator"] + experiment_env["subject_name"] + experiment_env["separator"] + str(experiment_env["experiment_number"]) + experiment_env["separator"] + exp_type + experiment_env["separator"] + '3' + experiment_env["separator"] + str(start_key_down['K_3']) + experiment_env["separator"] + '-2' + '\n')
         experiment_env["id_answer"] += 1
             
     return done, start_key_down
