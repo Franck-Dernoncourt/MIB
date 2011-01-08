@@ -26,7 +26,7 @@ from pygame.locals import *
 
 try: 
     # Graphics initializations
-    full_screen = True    
+    full_screen = False    
     window_size = (1024, 768)
     pygame.init()      
     if full_screen:
@@ -53,6 +53,8 @@ try:
     experiment_env["variant"] = ''
     experiment_env["exp_duration"] = 30
     experiment_env["id_answer"] = 0
+    experiment_env["max_number_of_points"] = 3 #1 or 3
+    experiment_env["duration_between_exp"] = 0
     
     # Write result file's headers
     result_file.write('IDANSWER' + experiment_env["separator"] + 'SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] + 'TYPE' + experiment_env["separator"] + 'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + experiment_env["separator"] + 'DURATION' + '\n')
@@ -84,6 +86,9 @@ try:
     
     pygame.mouse.set_visible(False)
     exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 1)
+    exp2.exp2(full_screen, experiment_env, surf, "normal")
+    
+    exp4.exp4(full_screen, experiment_env, surf, "color_distortion")
     
     for exp_arg in exp_arg_list:
         experiment_env["experiment_number"] = int(exp_arg[0][3])

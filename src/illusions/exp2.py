@@ -22,7 +22,6 @@ from utils import *
 
 # Parameters definition
 window_size = (1024, 768)
-circles = ((0, 1), (sqrt(3)/2, -0.5), (-sqrt(3)/2, -0.5))
 circle_scale = 0.3
 circle_radius = 6
 n_dots = 300
@@ -72,6 +71,11 @@ def exp2(full_screen, experiment_env, surf, exp_type):
     initial_id_answer = experiment_env["id_answer"]
     for i in range(n_dots):
         dots.append(random_point())
+        
+    if experiment_env["max_number_of_points"] == 3:
+        circles = ((0, 1), (sqrt(3)/2, -0.5), (-sqrt(3)/2, -0.5))
+    else:
+        circles = ((-sqrt(3)/2, -0.5), (-sqrt(3)/2, -0.5))
     
     try:
     

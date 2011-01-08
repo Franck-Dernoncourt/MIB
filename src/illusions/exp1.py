@@ -99,7 +99,7 @@ def exp1(full_screen, experiment_env, surf, shift_type, luminosity = 1, rotation
                 if show:
                     col = (150*luminosity, 150*luminosity, 0)
                     pygame.draw.circle(surf, col, coord(c1), int(circle_radius*circle_radius_factor), 0)
-                    if shift_type == 'fixed':
+                    if shift_type == 'fixed' and experiment_env["max_number_of_points"] == 3:
                         pygame.draw.circle(surf, col, coord(c2), int(circle_radius*circle_radius_factor), 0)
                         pygame.draw.circle(surf, col, coord(c3), int(circle_radius*circle_radius_factor), 0)
                 else:

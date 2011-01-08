@@ -104,5 +104,5 @@ def experiment_end(experiment_env, exp_type, initial_id_answer, surf, start_key_
     # Display black screen
     surf.fill((0, 0, 0))
     pygame.display.flip()
-    pygame.time.delay(2000)
+    pygame.time.delay(experiment_env["duration_between_exp"])
          
