@@ -86,9 +86,6 @@ try:
     
     pygame.mouse.set_visible(False)
     exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 1)
-    exp2.exp2(full_screen, experiment_env, surf, "normal")
-    
-    exp4.exp4(full_screen, experiment_env, surf, "color_distortion")
     
     for exp_arg in exp_arg_list:
         experiment_env["experiment_number"] = int(exp_arg[0][3])
