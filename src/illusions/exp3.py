@@ -82,12 +82,13 @@ def exp3(full_screen, experiment_env, surf, object_type):
         ## Main loop for stimulus display
         while (not done) and t < float(experiment_env["exp_duration"]):
             
-            done, start_key_down = exp_events_handle(experiment_env, object_type, start_key_down, t0) 
-           
-                    
+            # Loop initialization
             surf.fill(bg_color)
             t = (pygame.time.get_ticks() - t0)/1000.0
-            
+                        
+            # Handle events
+            done, start_key_down = exp_events_handle(experiment_env, object_type, start_key_down, t0) 
+
             ## Draw center point
             c = (0, 0)
             pygame.draw.circle(surf, circle_center_color, coord(c), circle_radius, 1)

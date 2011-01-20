@@ -88,11 +88,13 @@ def exp4(full_screen, experiment_env, surf, distortion_type):
         ## Main loop for stimulus display
         while (not done) and t < float(experiment_env["exp_duration"]):
             
-            done, start_key_down = exp_events_handle(experiment_env, distortion_type, start_key_down, t0)   
-           
+            # Loop initialization
             surf.fill(bg_color)  
             t = (pygame.time.get_ticks() - t0)/1000.0
             set_rotation(rotation_speed * t/2)
+            
+            # Handle events
+            done, start_key_down = exp_events_handle(experiment_env, distortion_type, start_key_down, t0)   
             
             ## Blue grid + distortion          
             for col in range(grid_width_points):

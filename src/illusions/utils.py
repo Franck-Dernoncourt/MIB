@@ -19,6 +19,7 @@ from pygame.locals import *
 from math import *
 
 
+
 # Handle events during experience
 def exp_events_handle(experiment_env, exp_type, start_key_down, t0, record_key = ''):
     done = False   
@@ -105,4 +106,3 @@ def experiment_end(experiment_env, exp_type, initial_id_answer, surf, start_key_
     surf.fill((0, 0, 0))
     pygame.display.flip()
     pygame.time.delay(experiment_env["duration_between_exp"])
-         

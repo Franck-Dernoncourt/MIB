@@ -87,8 +87,10 @@ def exp2(full_screen, experiment_env, surf, exp_type):
         ## Main loop for stimulus display
         while (not done) and t < float(experiment_env["exp_duration"]):
             
+            # Handle events
             done, start_key_down = exp_events_handle(experiment_env, exp_type, start_key_down, t0)            
     
+            # Draw circles
             surf.fill(bg_color)
             t = (pygame.time.get_ticks() - t0)/1000.0
             set_rotation(rotation_speed*t)
