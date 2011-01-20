@@ -24,9 +24,11 @@ import os, pygame, random
 from pygame.locals import *
 
 
+
 try: 
-    # Graphics initializations
-    full_screen = False    
+       
+    # Graphics initialization
+    full_screen = True    
     window_size = (1024, 768)
     pygame.init()      
     if full_screen:
@@ -57,14 +59,15 @@ try:
     experiment_env["max_number_of_points"] = 1 #1 or 3
     experiment_env["duration_between_exp"] = 2000
     experiment_env["mouse_visible"] = False
+    experiment_env["disappearing_point"] = True
+    experiment_env["disappearing_point_start"] = 2000
+    experiment_env["disappearing_point_duration"] = 2000
     
     # Write result_file's headers
     result_file.write('IDANSWER' + experiment_env["separator"] + 'SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] + 'TYPE' + experiment_env["separator"] + 'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + experiment_env["separator"] + 'DURATION' + '\n')
-    
-        
+
     # Define experiments' parameters
     exp_map = {'exp1' : exp1.exp1, 'exp2' : exp2.exp2, 'exp3' : exp3.exp3, 'exp4' : exp4.exp4}
-    
     exp_arg_list = [('exp1', [full_screen, experiment_env, surf, "fixed", 1, 0.5, 1]),
                     ('exp1', [full_screen, experiment_env, surf, "fixed", 1, 1, 1]),
                     ('exp1', [full_screen, experiment_env, surf, "fixed", 1, 1.5, 1]),
@@ -101,4 +104,4 @@ try:
     
 finally:
     pygame.quit()
-    #result_file.close()
+    result_file.close()
