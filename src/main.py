@@ -59,10 +59,14 @@ try:
     experiment_env["max_number_of_points"] = 1 #1 or 3
     experiment_env["duration_between_exp"] = 2000
     experiment_env["mouse_visible"] = False
-    experiment_env["disappearing_point"] = True
+    experiment_env["disappearing_point"] = False
     experiment_env["disappearing_point_start"] = 2000
     experiment_env["disappearing_point_duration"] = 2000
-    
+    experiment_env["moving_point"] = True
+    experiment_env["moving_point_start"] = 2000
+    experiment_env["moving_point_duration"] = 2000
+    experiment_env["moving_point_shift"] = 200
+       
     # Write result_file's headers
     result_file.write('IDANSWER' + experiment_env["separator"] + 'SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] + 'TYPE' + experiment_env["separator"] + 'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + experiment_env["separator"] + 'DURATION' + '\n')
 

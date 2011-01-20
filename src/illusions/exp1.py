@@ -107,7 +107,12 @@ def exp1(full_screen, experiment_env, surf, shift_type, luminosity = 1, rotation
                     
             # Draw circle(s)
             for circ in circles:
-                c1 = (circle_scale * circ[0] + shift / 1000.0 - 0.35, circle_scale * circ[1])
+                if (experiment_env["moving_point"] and (0 < mib_duration - experiment_env["moving_point_start"] < experiment_env["moving_point_duration"]) and (pressed_keys[K_1] or pressed_keys[K_KP1])):
+                    move = experiment_env["moving_point_shift"]
+                else:
+                    move = 0
+                    
+                c1 = (move / 1000.0 + circle_scale * circ[0] + shift / 1000.0 - 0.35, circle_scale * circ[1])
                 c2 = (circle_scale * circ[0] + shift / 1000.0 + 0.35, circle_scale * circ[1])
                 c3 = (0, -circle_scale * circ[1])
                 print mib_duration
