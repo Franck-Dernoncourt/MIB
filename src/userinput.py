@@ -51,7 +51,7 @@ def ask(screen, question):
         if inkey == K_BACKSPACE:
             current_string = current_string[0:-1]
             print "ok"
-        elif inkey == K_RETURN:
+        elif inkey == K_RETURN or K_KP_ENTER:
             break
         elif 65 <= inkey <= 90 or 97 <= inkey <= 122: # Accept only letters
             current_string.append(chr(inkey))
