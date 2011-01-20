@@ -26,14 +26,15 @@ from pygame.locals import *
 
 try: 
     # Graphics initializations
-    full_screen = True    
+    full_screen = False    
     window_size = (1024, 768)
     pygame.init()      
     if full_screen:
         surf = pygame.display.set_mode(window_size, HWSURFACE | FULLSCREEN | DOUBLEBUF)
     else:
         surf = pygame.display.set_mode(window_size)
-
+        
+    pygame.display.set_caption("MIB experiment")
     
     # Create a new result file and write it to disk. We could have also append.
     subject_name = ask(surf, "Name")
@@ -55,12 +56,13 @@ try:
     experiment_env["id_answer"] = 0
     experiment_env["max_number_of_points"] = 1 #1 or 3
     experiment_env["duration_between_exp"] = 2000
+    experiment_env["mouse_visible"] = False
     
-    # Write result file's headers
+    # Write result_file's headers
     result_file.write('IDANSWER' + experiment_env["separator"] + 'SUBJ' + experiment_env["separator"] + 'EXP#' + experiment_env["separator"] + 'TYPE' + experiment_env["separator"] + 'ANSWER' + experiment_env["separator"] + 'TIMESTAMP' + experiment_env["separator"] + 'DURATION' + '\n')
     
-    
-    # Call experiments
+        
+    # Define experiments' parameters
     exp_map = {'exp1' : exp1.exp1, 'exp2' : exp2.exp2, 'exp3' : exp3.exp3, 'exp4' : exp4.exp4}
     
     exp_arg_list = [('exp1', [full_screen, experiment_env, surf, "fixed", 1, 0.5, 1]),
@@ -82,11 +84,16 @@ try:
                     ('exp4', [full_screen, experiment_env, surf, "expansion_distortion"]),
                     ('exp4', [full_screen, experiment_env, surf, "color_distortion"])]
     
-    random.shuffle(exp_arg_list)
+    # Each experiment is viewed twice
+    exp_arg_list.extend(exp_arg_list)
     
-    pygame.mouse.set_visible(False)
+    # Experiments are in random order
+    random.shuffle(exp_arg_list)   
+    
+    # The first experiment is for training purpose
     exp1.exp1(full_screen, experiment_env, surf, "fixed", 1, 1, 1)
     
+    # Call experiments
     for exp_arg in exp_arg_list:
         experiment_env["experiment_number"] = int(exp_arg[0][3])
         exp_map[exp_arg[0]](*exp_arg[1])

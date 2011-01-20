@@ -60,21 +60,25 @@ def rotate(point):
 
 # Main function
 def exp1(full_screen, experiment_env, surf, shift_type, luminosity = 1, rotation_speed_factor = 1, circle_radius_factor = 1):
-    frames, show = 0, True
-    shift = 0
-    start_key_down = {}
-    start_key_down['K_1'] = 0
-    start_key_down['K_2'] = 0
-    start_key_down['K_3'] = 0
-    direction = 'right'
-    initial_id_answer = experiment_env["id_answer"]
-    shift_type_param = shift_type + '-' + str(luminosity) + '-' + str(rotation_speed_factor) + '-' + str(circle_radius_factor)
     
-    try:    
-        ## Stimulus display
+    try: 
+        ## Initialization 
+        frames, show = 0, True
+        shift = 0
+        start_key_down = {}
+        start_key_down['K_1'] = 0
+        start_key_down['K_2'] = 0
+        start_key_down['K_3'] = 0
+        direction = 'right'
+        initial_id_answer = experiment_env["id_answer"]
+        shift_type_param = shift_type + '-' + str(luminosity) + '-' + str(rotation_speed_factor) + '-' + str(circle_radius_factor)       
         t0 = pygame.time.get_ticks()
         t = 0
         done = False
+        pygame.mouse.set_visible(experiment_env["mouse_visible"])
+        
+        
+        ## Main loop for stimulus display
         while (not done) and t < float(experiment_env["exp_duration"]):
             
             done, start_key_down = exp_events_handle(experiment_env, shift_type_param, start_key_down, t0)  

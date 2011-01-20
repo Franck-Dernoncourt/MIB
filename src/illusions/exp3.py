@@ -67,6 +67,7 @@ def rotate(point, rotation_number = 0):
     
 def exp3(full_screen, experiment_env, surf, object_type):
     try:
+        # Initialization 
         t0 = pygame.time.get_ticks()
         t = 0
         frames = 0
@@ -76,6 +77,9 @@ def exp3(full_screen, experiment_env, surf, object_type):
         start_key_down['K_3'] = 0
         initial_id_answer = experiment_env["id_answer"]
         done = False
+        pygame.mouse.set_visible(experiment_env["mouse_visible"])
+        
+        ## Main loop for stimulus display
         while (not done) and t < float(experiment_env["exp_duration"]):
             
             done, start_key_down = exp_events_handle(experiment_env, object_type, start_key_down, t0) 

@@ -73,6 +73,7 @@ def distance(x, y):
 
 def exp4(full_screen, experiment_env, surf, distortion_type):
     try:
+        # Initialization 
         t0 = pygame.time.get_ticks()
         frames = 0
         start_key_down = {}
@@ -82,6 +83,9 @@ def exp4(full_screen, experiment_env, surf, distortion_type):
         initial_id_answer = experiment_env["id_answer"]
         done = False
         t = 0
+        pygame.mouse.set_visible(experiment_env["mouse_visible"])
+        
+        ## Main loop for stimulus display
         while (not done) and t < float(experiment_env["exp_duration"]):
             
             done, start_key_down = exp_events_handle(experiment_env, distortion_type, start_key_down, t0)   

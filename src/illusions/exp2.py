@@ -62,27 +62,29 @@ def rotate_y(point):
             -g_sin*point[1] + g_cos*point[2])
 
 def exp2(full_screen, experiment_env, surf, exp_type):
-    # initialize random points on sphere
-    dots = []
-    start_key_down = {}
-    start_key_down['K_1'] = 0
-    start_key_down['K_2'] = 0
-    start_key_down['K_3'] = 0
-    initial_id_answer = experiment_env["id_answer"]
-    for i in range(n_dots):
-        dots.append(random_point())
-        
-    if experiment_env["max_number_of_points"] == 3:
-        circles = ((0, 1), (sqrt(3)/2, -0.5), (-sqrt(3)/2, -0.5))
-    else:
-        circles = ((-sqrt(3)/2, -0.5), (-sqrt(3)/2, -0.5))
-    
-    try:
+    try: 
+        ## Initialization 
+        dots = []
+        start_key_down = {}
+        start_key_down['K_1'] = 0
+        start_key_down['K_2'] = 0
+        start_key_down['K_3'] = 0
+        initial_id_answer = experiment_env["id_answer"]
+        for i in range(n_dots):
+            dots.append(random_point())
+            
+        if experiment_env["max_number_of_points"] == 3:
+            circles = ((0, 1), (sqrt(3)/2, -0.5), (-sqrt(3)/2, -0.5))
+        else:
+            circles = ((-sqrt(3)/2, -0.5), (-sqrt(3)/2, -0.5))
     
         t0 = pygame.time.get_ticks()
         t = 0
         frames = 0
         done = False
+        pygame.mouse.set_visible(experiment_env["mouse_visible"])
+        
+        ## Main loop for stimulus display
         while (not done) and t < float(experiment_env["exp_duration"]):
             
             done, start_key_down = exp_events_handle(experiment_env, exp_type, start_key_down, t0)            
